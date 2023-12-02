@@ -16,40 +16,35 @@ fun main() = day(2) {
         inputLines.forEach { line ->
             val (gamePart, maximaPart) = line.split(':')
             val game = gamePart.removeRange(0, 5).toInt()
-            var maxRed = 0
-            var maxGreen = 0
-            var maxBlue = 0
+            val maxima = mutableMapOf("red" to 0, "green" to 0, "blue" to 0)
 
             val maximaParts = maximaPart.replace(" ", "").split(';')
 
             maximaParts.forEach { part ->
-                var maxPartRed = 0
-                var maxPartGreen = 0
-                var maxPartBlue = 0
+                val partMaxima = mutableMapOf("red" to 0, "green" to 0, "blue" to 0)
 
                 part.split(',').forEach { colorMaximum ->
-                    if (colorMaximum.contains("red")) maxPartRed += colorMaximum.dropLast(3).toInt()
-                    if (colorMaximum.contains("green")) maxPartGreen += colorMaximum.dropLast(5).toInt()
-                    if (colorMaximum.contains("blue")) maxPartBlue += colorMaximum.dropLast(4).toInt()
+                    val color = colorMaximum.takeLastWhile { it.isLetter() }
+                    partMaxima[color] = partMaxima[color]!! + colorMaximum.dropLastWhile { it.isLetter() }.toInt()
                 }
 
-                if (maxPartRed > maxRed) maxRed = maxPartRed
-                if (maxPartGreen > maxGreen) maxGreen = maxPartGreen
-                if (maxPartBlue > maxBlue) maxBlue = maxPartBlue
+                partMaxima.forEach { (color, max) ->
+                    if (maxima[color]!! < max) maxima[color] = max
+                }
             }
 
-            games.add(Game(game, maxRed, maxGreen, maxBlue))
+            games.add(Game(game, maxima["red"]!!, maxima["green"]!!, maxima["blue"]!!))
         }
         return games
     }
 
     part1 {
-        val (mred, mgreen, mblue) = Triple(12, 13, 14)
+        val (mRed, mGreen, mBlue) = Triple(12, 13, 14)
 
         val games = calculateGames()
 
         games.sumOf { game ->
-            if (mred >= game.maxRed && mgreen >= game.maxGreen && mblue >= game.maxBlue) game.number
+            if (mRed >= game.maxRed && mGreen >= game.maxGreen && mBlue >= game.maxBlue) game.number
             else 0
         }
     }
