@@ -12,15 +12,10 @@ fun main() = day(5) {
     data class MapKey(val key: String, val value: String)
 
     fun calculateRanges(): MutableMap<MapKey, MutableList<Range>> {
-        // Key - Value, List of Key pair - Value pair
         val ranges = mutableMapOf<MapKey, MutableList<Range>>()
         var (key, value) = "" to ""
         inputLines.drop(1).forEach { line ->
-            if (line.isBlank()) {
-                key = ""
-                value = ""
-                return@forEach
-            }
+            if (line.isBlank()) return@forEach
             if (line.replace(" ", "").all { !it.isDigit() }) {
                 val split = line.dropLast(5).split('-')
                 key = split[0]
@@ -57,8 +52,7 @@ fun main() = day(5) {
     }
 
     part1 {
-        val seeds = inputLines.first().drop(7).split(' ').mapNotNull { it.toLongOrNull() }
-
+        val seeds = inputLines.first().drop(7).split(' ').map { it.toLong() }
         val ranges = calculateRanges()
 
         val seedLocations = seeds.mapNotNull { seed ->
@@ -69,8 +63,7 @@ fun main() = day(5) {
     }
 
     part2 {
-        val seedRanges = inputLines.first().drop(7).split(' ').mapNotNull { it.toLongOrNull() }.chunked(2)
-
+        val seedRanges = inputLines.first().drop(7).split(' ').map { it.toLong() }.chunked(2)
         val ranges = calculateRanges()
 
         var lowest = Int.MAX_VALUE
