@@ -1,5 +1,7 @@
 plugins {
     kotlin("jvm") version "1.9.21"
+
+    application
 }
 
 group = "dev.nyon"
@@ -15,4 +17,8 @@ dependencies {
 
 kotlin {
     jvmToolchain(8)
+}
+
+application {
+    mainClass.set("dev.nyon.aoc.Day08Kt")
 }
