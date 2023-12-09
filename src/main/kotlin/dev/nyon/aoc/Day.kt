@@ -37,7 +37,8 @@ class Day(private val day: Int, val block: Day.() -> Unit) {
 
     private fun testPart(part: Int, block: (() -> Any?)?, expected: Any?) {
         if (block == null || expected == null) return
-        val result = block()
+        var result = block()
+        if (result is Long) result = result.toInt()
         if (expected != result) println("Test $part ${TextColors.red("failed")}! Expected '${TextColors.blue(expected.toString())}' but got '$result'")
         else println("Test $part ${TextColors.green("succeeded")}! Expected '${TextColors.blue(expected.toString())}' - got '$result'")
     }
