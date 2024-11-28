@@ -19,6 +19,9 @@ fun main() = day(10) {
 
     fun Char.nextDirection(previous: Char): Char? {
         val directionPair = charMap[this] ?: return null
+        // The direction you came from.
+        // E.g.: If you have -- the first previous char points to the east,
+        // but in the current char you are coming from the west
         val transformedPrevious = when (previous) {
             'N' -> 'S'
             'S' -> 'N'

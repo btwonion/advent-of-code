@@ -39,8 +39,8 @@ class Day(private val day: Int, val block: Day.() -> Unit) {
         if (block == null || expected == null) return
         var result = block()
         if (result is Long) result = result.toInt()
-        if (expected != result) println("Test $part ${TextColors.red("failed")}! Expected '${TextColors.blue(expected.toString())}' but got '$result'")
-        else println("Test $part ${TextColors.green("succeeded")}! Expected '${TextColors.blue(expected.toString())}' - got '$result'")
+        if (expected != result) println("Test $part ${TextColors.red("failed")}! Expected '${TextColors.blue(expected.toString())}' but got '$result'.")
+        else println("Test $part ${TextColors.green("succeeded")}! Expected '${TextColors.blue(expected.toString())}' - got '$result'.")
     }
 
     private fun runPart(part: Int, block: (() -> Any?)?) {
@@ -49,7 +49,7 @@ class Day(private val day: Int, val block: Day.() -> Unit) {
         val time = measureTime {
             result = block()
         }
-        println("The ${TextColors.green("result")} of part $part is ${TextColors.blue(result.toString())} and took ${TextColors.magenta(time.toString())}")
+        println("The ${TextColors.green("result")} of part $part is ${TextColors.blue(result.toString())} and took ${TextColors.magenta(time.toString())}.")
     }
 
     fun run() {
