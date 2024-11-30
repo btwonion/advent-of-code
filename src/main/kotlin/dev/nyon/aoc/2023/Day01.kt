@@ -1,10 +1,12 @@
-package dev.nyon.aoc
+package dev.nyon.aoc.`2023`
+
+import dev.nyon.aoc.day
 
 /**
  * @author btwonion
  * @since 01/12/2023
  */
-fun main() = day(1) {
+fun main() = day(1, 2023) {
     test1Expected = 142
     test2Expected = 281
 

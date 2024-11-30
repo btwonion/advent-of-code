@@ -1,6 +1,8 @@
-package dev.nyon.aoc
+package dev.nyon.aoc.`2023`
 
-fun main() = day(13) {
+import dev.nyon.aoc.day
+
+fun main() = day(13, 2023) {
     test1Expected = 405
 
     val patterns = inputLines.fold(mutableListOf<MutableList<String>>(mutableListOf())) { acc, line ->

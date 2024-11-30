@@ -11,11 +11,11 @@ import kotlin.time.measureTime
  * @author btwonion
  * @since 01/12/2023
  */
-fun day(day: Int, block: Day.() -> Unit) {
-    Day(day, block).run()
+fun day(day: Int, year: Int, block: Day.() -> Unit) {
+    Day(day, year, block).run()
 }
 
-class Day(private val day: Int, val block: Day.() -> Unit) {
+class Day(private val day: Int, private val year: Int, val block: Day.() -> Unit) {
     var inputText = ""
         private set
     val inputLines: List<String>
@@ -28,6 +28,10 @@ class Day(private val day: Int, val block: Day.() -> Unit) {
 
     private var part1: (() -> Any?)? = null
     private var part2: (() -> Any?)? = null
+
+    fun debug(string: String) {
+        if (isTestRun) println(string)
+    }
 
     fun part1(block: () -> Any?) {
         part1 = block
@@ -57,7 +61,7 @@ class Day(private val day: Int, val block: Day.() -> Unit) {
     }
 
     fun run() {
-        println(TextColors.cyan("Running day $day"))
+        println(TextColors.cyan("Running day $day of year $year"))
 
         println(TextColors.yellow("Running tests..."))
         println()
@@ -92,6 +96,6 @@ class Day(private val day: Int, val block: Day.() -> Unit) {
 
     private fun getPath(extra: String? = null): Path {
         val dayName = day.toString().padStart(2, '0')
-        return Path("src/main/resources/inputs/day$dayName/day$dayName${extra ?: ""}.txt")
+        return Path("src/main/resources/inputs/$year/day$dayName/day$dayName${extra ?: ""}.txt")
     }
 }

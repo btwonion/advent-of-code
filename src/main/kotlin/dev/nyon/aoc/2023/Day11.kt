@@ -1,8 +1,9 @@
-package dev.nyon.aoc
+package dev.nyon.aoc.`2023`
 
+import dev.nyon.aoc.day
 import kotlin.math.abs
 
-fun main() = day(11) {
+fun main() = day(11, 2023) {
     test1Expected = 374
     // 100x
     test2Expected = 8410
