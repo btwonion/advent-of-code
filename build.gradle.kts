@@ -1,7 +1,5 @@
 plugins {
-    kotlin("jvm") version "2.0.21"
-
-    application
+    kotlin("jvm") version "2.1.0"
 }
 
 group = "dev.nyon"
@@ -12,13 +10,9 @@ repositories {
 }
 
 dependencies {
-    implementation("com.github.ajalt.mordant:mordant:2.2.0")
+    implementation("com.github.ajalt.mordant:mordant:3.0.1")
 }
 
 kotlin {
     jvmToolchain(8)
-}
-
-application {
-    mainClass.set("dev.nyon.aoc.Day08Kt")
 }
