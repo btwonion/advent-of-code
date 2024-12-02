@@ -1,6 +1,7 @@
 package dev.nyon.aoc
 
 import com.github.ajalt.mordant.rendering.TextColors
+import com.github.ajalt.mordant.rendering.TextStyles
 import java.nio.file.Path
 import kotlin.io.path.Path
 import kotlin.io.path.exists
@@ -57,11 +58,11 @@ class Day(private val day: Int, private val year: Int, val block: Day.() -> Unit
         val time = measureTime {
             result = block()
         }
-        println("The ${TextColors.green("result")} of part $part is ${TextColors.blue(result.toString())} and took ${TextColors.magenta(time.toString())}.")
+        println("The ${TextColors.green("result")} of part $part is ${TextColors.blue(result.toString())}. The calculation took ${TextColors.magenta(time.toString())}.")
     }
 
     fun run() {
-        println(TextColors.cyan("Running day $day of year $year"))
+        println(TextStyles.bold(TextColors.cyan("Running day $day of year $year")))
 
         println(TextColors.yellow("Running tests..."))
         println()
@@ -78,8 +79,7 @@ class Day(private val day: Int, private val year: Int, val block: Day.() -> Unit
         }
 
         println()
-        println()
-        println(TextColors.gray("Running challenge..."))
+        println(TextColors.yellow("Running challenge..."))
         println()
         inputText = getPath().readText()
         block()
