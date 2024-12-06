@@ -44,12 +44,10 @@ class Day(private val day: Int, private val year: Int, val block: Day.() -> Unit
 
     private fun testPart(part: Int, block: (() -> Any?)?, expected: Any?) {
         if (block == null || expected == null) return
-        isTestRun = true
         var result = block()
         if (result is Long) result = result.toInt()
         if (expected != result) println("Test $part ${TextColors.red("failed")}! Expected '${TextColors.blue(expected.toString())}' but got '$result'.")
         else println("Test $part ${TextColors.green("succeeded")}! Expected '${TextColors.blue(expected.toString())}' - got '$result'.")
-        isTestRun = false
     }
 
     private fun runPart(part: Int, block: (() -> Any?)?) {
@@ -68,6 +66,7 @@ class Day(private val day: Int, private val year: Int, val block: Day.() -> Unit
         println()
 
         repeat(2) { testCount ->
+            isTestRun = true
             getPath("_test_${testCount + 1}").also { if (it.exists()) inputText = it.readText() }
             block()
             val (partBlock, expected) = when (testCount) {
@@ -76,6 +75,7 @@ class Day(private val day: Int, private val year: Int, val block: Day.() -> Unit
                 else -> part1 to test1Expected
             }
             testPart(testCount + 1, partBlock, expected)
+            isTestRun = false
         }
 
         println()
